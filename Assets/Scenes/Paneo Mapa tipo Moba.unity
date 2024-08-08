@@ -3742,7 +3742,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 35.9
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6982,10 +6982,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2550349c5d9caab4598bc1bc9c5b0816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activarMapController: 0
+  puedePanear: 1
+  puedeRotar: 1
+  puedeHacerZoom: 1
   virtualCamera: {fileID: 1140474097}
   cameraTarget: {fileID: 6321092}
-  sensibilidad: 0.03
+  sensibilidadPaneo: 0.6
+  sensibilidadMinimaPaneo: 0.3
+  sensibilidadRotacion: 1
+  minZoom: 20
+  maxZoom: 60
 --- !u!4 &1135198342
 Transform:
   m_ObjectHideFlags: 0
@@ -7041,7 +7047,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 6321092}
   m_Follow: {fileID: 6321092}
   m_Lens:
-    FieldOfView: 35.9
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -11915,8 +11921,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 418288441}
-  - {fileID: 902816474}
   - {fileID: 626696612}
+  - {fileID: 902816474}
   - {fileID: 880679450}
   - {fileID: 1135198342}
+  - {fileID: 418288441}
