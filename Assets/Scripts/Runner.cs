@@ -20,7 +20,7 @@ public class Runner : MonoBehaviour
     private void Start()
     {
         carrilActual = carrilInicial;
-        nextPosition = transform.position;
+        nextPosition = transform.localPosition;
     }
 
     public void Desactivar()
@@ -54,7 +54,7 @@ public class Runner : MonoBehaviour
     {
         if (!enableRunner) return;
 
-        transform.position = Vector3.MoveTowards(transform.position, nextPosition, velocidadDesplazamientoCarril * Time.fixedDeltaTime);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, nextPosition, velocidadDesplazamientoCarril * Time.fixedDeltaTime);
     }
 
 
