@@ -13,6 +13,10 @@ public class TouchSlide : MonoBehaviour
     Vector2 screenResolution;
     float minimoPorcentajeDesplazamiento = 0.1f; // 10 porciento de ancho o alto
 
+    public void Desactivar()
+    {
+        enableSlide = false;
+    }
 
     private void Update()
     {

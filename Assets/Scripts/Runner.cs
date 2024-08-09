@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Runner : MonoBehaviour
 {
-    public float distanciaEntreCarril;   // cuanto hay que desplazarse horizontalmente hacia el siguiente carril
-    public int cantidadCarriles;    // se leen de izquierda a derecha (1 , 2 , 3 , 4 , etc)
-    public int carrilInicial;       // en cual carril comienza el player
+    public bool enableRunner;
+    public float distanciaEntreCarril;          // cuanto hay que desplazarse horizontalmente hacia el siguiente carril
+    public int cantidadCarriles;                // se leen de izquierda a derecha (1 , 2 , 3 , 4 , etc)
+    public int carrilInicial;                   // en cual carril comienza el player
     public float velocidadDesplazamientoCarril;
-    public float lerpTimeDoblar = 0.2f;
+    public float lerpTimeDoblar;
     public int carrilActual;
-    Vector3 nextPosition;
 
     public Animator anim;
 
+    Vector3 nextPosition;
 
 
     private void Start()
@@ -21,8 +22,15 @@ public class Runner : MonoBehaviour
         carrilActual = carrilInicial;
         nextPosition = transform.position;
     }
+
+    public void Desactivar()
+    {
+        enableRunner = false;
+    }
+
     public void MoverDerecha()
     {
+        if (!enableRunner) return;
         if (carrilActual == cantidadCarriles) return;
 
         nextPosition.x += distanciaEntreCarril;
@@ -33,6 +41,7 @@ public class Runner : MonoBehaviour
 
     public void MoverIzquierda()
     {
+        if (!enableRunner) return;
         if (carrilActual == 1) return;
 
         nextPosition.x -= distanciaEntreCarril;
@@ -43,6 +52,8 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!enableRunner) return;
+
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, velocidadDesplazamientoCarril * Time.fixedDeltaTime);
     }
 
