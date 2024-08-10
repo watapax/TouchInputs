@@ -6,12 +6,13 @@ public class MoverHorizontal : MonoBehaviour
 {
     public float velocidad;
     public float min_x, max_x;
+    public Transform elTransform;
     Touch touch;
     Vector3 posicionFinal;
 
     private void Start()
     {
-        posicionFinal = transform.localPosition;
+        posicionFinal = elTransform.localPosition;
     }
     private void Update()
     {
@@ -23,7 +24,7 @@ public class MoverHorizontal : MonoBehaviour
             float direccion = vp.x > 0.5f ? 1 : -1;
             posicionFinal.x += direccion * velocidad * Time.deltaTime;
             posicionFinal.x = Mathf.Clamp(posicionFinal.x, min_x, max_x);
-            transform.localPosition = posicionFinal;
+            elTransform.localPosition = posicionFinal;
         }
     }
 }
