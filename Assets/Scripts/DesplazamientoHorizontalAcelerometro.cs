@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RodarConAcelerometro : MonoBehaviour
+public class DesplazamientoHorizontalAcelerometro : MonoBehaviour
 {
 
-    public Rigidbody rb;
-    public float fuerza;
+    public float speed;
     Vector3 aceleracion;
 
     private void Update()
@@ -16,7 +15,6 @@ public class RodarConAcelerometro : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 torque = new Vector3(aceleracion.y, 0, -aceleracion.x);
-        rb.AddTorque(torque * fuerza);
+        transform.Translate(Vector3.right * aceleracion.x * speed * Time.fixedDeltaTime,Space.Self);
     }
 }
