@@ -63,12 +63,12 @@ public class TouchSlide : MonoBehaviour
             {
                 if(deltaX > 0)
                 {
-                    print("derecha");
+                    //print("derecha");
                     onRightSlide.Invoke();
                 }
                 else
                 {
-                    print("izquierda");
+                    //print("izquierda");
                     onLeftSlide.Invoke();
                 }
 
@@ -77,12 +77,12 @@ public class TouchSlide : MonoBehaviour
             {
                 if(deltaY > 0)
                 {
-                    print("arriba");
+                    //print("arriba");
                     onUpSlide.Invoke();
                 }
                 else
                 {
-                    print("abajo");
+                    //print("abajo");
                     onDownSlide.Invoke();
                 }
             }

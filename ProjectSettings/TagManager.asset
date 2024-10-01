@@ -6,6 +6,8 @@ TagManager:
   tags:
   - bala
   - obstaculo
+  - trampa
+  - rompible
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Water
   - UI
   - raycastPlane
-  - 
+  - obstaculos
   - 
   - 
   - 
