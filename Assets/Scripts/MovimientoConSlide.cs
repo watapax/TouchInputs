@@ -8,10 +8,13 @@ public class MovimientoConSlide : MonoBehaviour
     public float velocidadMovimiento;
     public LayerMask layerMask;
     public Animator anim;
+    public GameObject hitEffectPrefab;
     public UnityEvent onWallHit, onChocoConTrampa;
+
     
 
     bool moviendose;
+    bool pegadoAPared;
     Vector3 siguienteDireccion;
     Vector3 velocidad;
 
@@ -39,6 +42,8 @@ public class MovimientoConSlide : MonoBehaviour
             siguienteDireccion = hit2d.point + (Vector2)(direccion*0.5f)*-1; // <== esto es para que no se superponga con la pared suponiendo que la caja mide 1 x 1
             moviendose = true;
             velocidad = direccion;
+
+            pegadoAPared = Vector3.Distance(transform.position, siguienteDireccion) < 0.1f;
 
             // esto es para decidir cual animación de movimiento reproducir
             string animMover = "";
@@ -114,8 +119,13 @@ public class MovimientoConSlide : MonoBehaviour
   
         }
 
+        AnimacionAterrizaje();
+        EfectoParticulaImpacto();
 
+    }
 
+    void AnimacionAterrizaje()
+    {
         // esto es para decidir cual animación de aterrizaje reproducir
         string landAnim = "";
 
@@ -129,6 +139,17 @@ public class MovimientoConSlide : MonoBehaviour
             landAnim = "LandLeft";
 
         anim.Play(landAnim);
+    }
+
+    void EfectoParticulaImpacto()
+    {
+        if (pegadoAPared) return;
+        
+        //Efecto particula de impacto solo si llega viajando y no si ya está pegado a la pared
+        Vector3 posEffect = transform.position;
+        posEffect.z = -0.1f;
+        GameObject hitEffect = Instantiate(hitEffectPrefab, posEffect, Quaternion.identity);
+        hitEffect.transform.up = velocidad * -1;
 
     }
 
