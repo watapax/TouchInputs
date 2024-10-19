@@ -8,16 +8,19 @@ public class LaColision
 {
     public string elTag;
     public UnityEvent onTriggerEnter;
+    public bool destruirElOtro;
 
     public void EjectarEvento()
     {
         onTriggerEnter.Invoke();
+
     }
 }
 
 public class DetectarTrigger2D : MonoBehaviour
 {
     public LaColision[] colisiones;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,7 +29,12 @@ public class DetectarTrigger2D : MonoBehaviour
             if(collision.CompareTag(colisiones[i].elTag))
             {
                 colisiones[i].EjectarEvento();
+
+                if (colisiones[i].destruirElOtro)
+                    Destroy(collision.gameObject);
+
                 break;
+                
             }
         }
     }
