@@ -9,6 +9,7 @@ TagManager:
   - trampa
   - rompible
   - end
+  - enemigo
   layers:
   - Default
   - TransparentFX

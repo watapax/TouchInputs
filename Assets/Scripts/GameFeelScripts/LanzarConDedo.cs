@@ -10,15 +10,12 @@ using UnityEngine;
 
 public class LanzarConDedo : MonoBehaviour
 {
+    public float promedioEnergia;
+    Rigidbody2D rb2d;
     Vector3 screenPoint;
     Vector3 offset;
 
     bool seLanzo;
-
-
-
-
-
 
 
     HistorialPosiciones[] posiciones;
@@ -40,7 +37,10 @@ public class LanzarConDedo : MonoBehaviour
 
     private void Awake()
     {
+        rb2d = GetComponent<Rigidbody2D>();
+        rb2d.isKinematic = true;
         posiciones = new HistorialPosiciones[largoHistorial];
+        lastPosition = transform.position;
     }
 
     void ActualizarHistorial(Vector3 _lastPos, float _lastTime)
@@ -88,14 +88,53 @@ public class LanzarConDedo : MonoBehaviour
         velocidadFinal = (currentPos - prevPos);
 
         seLanzo = true;
+
+        rb2d.isKinematic = false;
+        rb2d.AddForce(velocidadFinal, ForceMode2D.Impulse);// .velocity = velocidadFinal * Time.deltaTime * 5;
     }
 
     private void Update()
     {
+        CalcularPromedioEnergia();
         if(seLanzo)
         {
-            transform.Translate(velocidadFinal * Time.deltaTime * 5);
+
+            //transform.Translate(velocidadFinal * Time.deltaTime * 5);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("hola");
+        Vector3 normal = collision.contacts[0].normal;
+        velocidadFinal = normal * velocidadFinal.magnitude;
+    }
+
+    void  CalcularPromedioEnergia()
+    {
+        // Calcular la distancia recorrida en este frame
+        float distance = Vector3.Distance(lastPosition, transform.position);
+
+        // Calcular la velocidad (distancia / tiempo entre frames)
+        currentSpeed = distance / Time.deltaTime;
+
+        // Actualizar la última posición
+        lastPosition = transform.position;
+
+        // Verificar si está moviéndose rápido o lento
+        if (currentSpeed > speedThreshold)
+        {
+            Debug.Log("El objeto se está moviendo rápido.");
+        }
+        else
+        {
+            Debug.Log("El objeto se está moviendo lento.");
+        }
+    }
+
+
+    private Vector3 lastPosition;
+    public float speedThreshold = 1.0f; // Velocidad en unidades por segundo
+    public float currentSpeed;
 
 }
