@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class BalasDesdeBorde : MonoBehaviour
 {
-    public UnityEvent onAtaqueExitoso, onAtaqueFracaso;
-    public HpSystem azulito;
+    public UnityEvent onFinishAttack;
     public GameObject advertencia;
     public GameObject balaPrefab;
     public Transform targetTransform;
@@ -27,31 +26,14 @@ public class BalasDesdeBorde : MonoBehaviour
     {
         detener = true;
         advertencia.SetActive(false);
+        Invoke("EsperarHastaQueSeRebienteLaBala", 2);
 
-        if (azulito.hp < 1)
-        {
-            print("ataque exitoso");
-            onAtaqueExitoso.Invoke();
-        }
-        else
-        {
-            Invoke("EsperarHastaQueSeRebienteLaBala", 2);
-
-        }
     }
 
     void EsperarHastaQueSeRebienteLaBala()
     {
-        if (azulito.hp < 1)
-        {
-            print("ataque exitoso");
-            onAtaqueExitoso.Invoke();
-        }
-        else
-        {
-            print("ataque fracasó");
-            onAtaqueFracaso.Invoke();
-        }
+        print("ataque terminado");
+        onFinishAttack.Invoke();
     }
 
     private void Start()

@@ -8,6 +8,7 @@ public class ManagerSystem : MonoBehaviour
     int count;
     public UnityEvent onComplete;
     bool complete;
+    public float tiempoDeEsperaAntesDeTerminar;
 
     public void AgregarHit()
     {
@@ -16,8 +17,13 @@ public class ManagerSystem : MonoBehaviour
         count++;
         if(count >= hp)
         {
-            onComplete.Invoke();
             complete = true;
+            Invoke("Terminar", tiempoDeEsperaAntesDeTerminar);
         }
+    }
+
+    void Terminar()
+    {
+        onComplete.Invoke();
     }
 }

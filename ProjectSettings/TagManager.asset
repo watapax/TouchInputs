@@ -46,3 +46,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Frente
+    uniqueID: 3404514215
+    locked: 0
+  - name: MasFrente
+    uniqueID: 2337017545
+    locked: 0
