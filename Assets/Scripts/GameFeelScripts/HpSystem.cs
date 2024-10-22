@@ -20,14 +20,25 @@ public class HpSystem : MonoBehaviour, IDamagable
         if (hp == 0) return;
         hp--;
 
-        if(hpBarImage != null)
+        Check();
+    }
+
+    public void TakeDamage(int _cantidad)
+    {
+        if (hp == 0) return;
+        hp -= _cantidad;
+
+        Check();
+    }
+
+    void Check()
+    {
+        if (hpBarImage != null)
         {
             float _currentHp = (float)hp;
             float fillImage = _currentHp / maxHp;
             hpBarImage.fillAmount = fillImage;
         }
-
-
 
 
         if (hp < 1)
